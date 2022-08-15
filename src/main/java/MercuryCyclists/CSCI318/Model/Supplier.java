@@ -45,4 +45,8 @@ public class Supplier {
     public void addContact(Optional<Contact> contact) {
         contacts.add(contact);
     }
+
+    public void removeContact(Optional<Contact> contact) {
+        contacts.remove(contact);
+    }
 }

@@ -37,4 +37,6 @@ public class SupplierService {
     public int deleteSupplierById(long id) { return supplierDao.deleteSupplierById(id); }
 
     public int addContactToSupplier(long supplierID, long contactID){ return supplierDao.addContactToSupplier(supplierID, contactID);}
+
+    public int removeContactFromSupplier(long supplierID, long contactID){ return supplierDao.removeContactFromSupplier(supplierID, contactID);}
 }

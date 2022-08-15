@@ -47,4 +47,9 @@ public class SupplierController {
     public void addContactToSupplier(@PathVariable ("supplierID") long supplierID, @PathVariable ("contactID") long contactID){
         supplierService.addContactToSupplier(supplierID, contactID);
     }
+
+    @DeleteMapping(path = "{supplierID}/{contactID}")
+    public void removeContactFromSupplier(@PathVariable ("supplierID") long supplierID, @PathVariable ("contactID") long contactID){
+        supplierService.removeContactFromSupplier(supplierID, contactID);
+    }
 }

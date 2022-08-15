@@ -18,4 +18,5 @@ public interface SupplierDao {
 
     int addContactToSupplier(long supplierID, long contactID);
 
+    int removeContactFromSupplier(long supplierID, long contactID);
 }

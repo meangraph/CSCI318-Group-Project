@@ -23,9 +23,7 @@ public class ContactService {
 
     public List<Contact> getAllContacts(){return contactDao.getAllContacts();}
 
-    public Optional<Contact> getContactById(String id){
-        return contactDao.getContactById(id);
-    }
+    public Optional<Contact> getContactById(String id){return contactDao.getContactById(id);}
 
     public int deleteContactById(String id){
         return contactDao.deleteContactById(id);

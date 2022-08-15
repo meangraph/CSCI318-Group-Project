@@ -24,14 +24,14 @@ public class ContactDataAccessService implements ContactDao{
     }
 
     @Override
-    public Optional<Contact> getContactById(String id) {
+    public Optional<Contact> getContactById(long id) {
         return DB.stream()
-                .filter(contact -> contact.getID().equals(id))
+                .filter(contact -> contact.getID() == id)
                 .findFirst();
     }
 
     @Override
-    public int deleteContactById(String id) {
+    public int deleteContactById(long id) {
         Optional<Contact> contactToDelete = getContactById(id);
         if (contactToDelete.isPresent()) {
             DB.remove(contactToDelete.get());
@@ -41,7 +41,7 @@ public class ContactDataAccessService implements ContactDao{
     }
 
     @Override
-    public int updateContactById(String id, Contact update) {
+    public int updateContactById(long id, Contact update) {
         return getContactById(id)
                 .map(contact -> {
                     int contactIndex = DB.indexOf(contact);

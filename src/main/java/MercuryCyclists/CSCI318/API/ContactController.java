@@ -30,17 +30,17 @@ public class ContactController {
         return contactService.getAllContacts();
     }
     @GetMapping(path = "{ID}")//Get Requests
-    public Contact getContactById(@PathVariable("ID") String id){
+    public Contact getContactById(@PathVariable("ID") long id){
         return contactService.getContactById(id)
                 .orElse(null);
     }
     @DeleteMapping(path = "{ID}")//Delete Requests
-    public void deleteContactById(@PathVariable("ID") String id){
+    public void deleteContactById(@PathVariable("ID") long id){
         contactService.deleteContactById(id);
     }
 
     @PutMapping(path = "{ID}")//Update Requests
-    public void updateContactById(@PathVariable ("ID") String id,@Valid @NonNull @RequestBody Contact contact){
+    public void updateContactById(@PathVariable ("ID") long id,@Valid @NonNull @RequestBody Contact contact){
         contactService.updateContactById(id,contact);
     }
 }

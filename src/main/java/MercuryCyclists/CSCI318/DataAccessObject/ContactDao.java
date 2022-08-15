@@ -11,9 +11,9 @@ public interface ContactDao {
 
     List<Contact> getAllContacts();
 
-    Optional<Contact> getContactById(String id);
-    int deleteContactById(String id);
+    Optional<Contact> getContactById(long id);
+    int deleteContactById(long id);
 
-    int updateContactById(String id, Contact newContact);
+    int updateContactById(long id, Contact newContact);
 
 }

@@ -23,13 +23,13 @@ public class ContactService {
 
     public List<Contact> getAllContacts(){return contactDao.getAllContacts();}
 
-    public Optional<Contact> getContactById(String id){return contactDao.getContactById(id);}
+    public Optional<Contact> getContactById(long id){return contactDao.getContactById(id);}
 
-    public int deleteContactById(String id){
+    public int deleteContactById(long id){
         return contactDao.deleteContactById(id);
     }
 
-    public int updateContactById(String id, Contact newContact){
+    public int updateContactById(long id, Contact newContact){
         return contactDao.updateContactById(id,newContact);
     }
 }

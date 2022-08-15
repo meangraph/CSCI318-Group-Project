@@ -16,4 +16,6 @@ public interface SupplierDao {
 
     int updateSupplierById(long id,Supplier supplier);
 
+    int addContactToSupplier(long supplierID, long contactID);
+
 }

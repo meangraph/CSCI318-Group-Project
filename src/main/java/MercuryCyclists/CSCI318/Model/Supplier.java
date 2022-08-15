@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Supplier {
 
@@ -18,7 +19,7 @@ public class Supplier {
     private final String companyName;
     @NotBlank
     private final String base;
-    private final List<Contact> contacts;
+    private final List<Optional<Contact>> contacts;
 
     public Supplier(@JsonProperty("id") long ID,
                     @JsonProperty("companyName") String companyName,
@@ -26,7 +27,7 @@ public class Supplier {
         this.ID = ID;
         this.companyName = companyName;
         this.base = base;
-        this.contacts = new ArrayList<>();
+        this.contacts = new ArrayList<Optional<Contact>>();
     }
 
     public long getID() {return ID;}
@@ -39,5 +40,9 @@ public class Supplier {
         return base;
     }
 
-    public List<Contact> getContacts() { return contacts; }
+    public List<Optional<Contact>> getContacts() { return contacts; }
+
+    public void addContact(Optional<Contact> contact) {
+        contacts.add(contact);
+    }
 }

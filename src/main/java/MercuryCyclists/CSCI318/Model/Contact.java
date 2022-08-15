@@ -1,25 +1,33 @@
 package MercuryCyclists.CSCI318.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 /** This is the class responsible for creating objects of type Contact. Contact objects are employees that are a part of Supplier objects*/
 
+@Entity(name = "Contact")
 public class Contact {
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ID;
-    @NotBlank
-    private final String name;
-    @NotBlank
-    private final String phone;
-    @NotBlank
-    private final String email;
-    @NotBlank
-    private final String position;
+
+    private String name;
+
+    private String phone;
+
+    private String email;
+
+    private String position;
+
+    public Contact() {
+
+    }
 
     public Contact(@JsonProperty("id") long id,
                    @JsonProperty("name") String name,

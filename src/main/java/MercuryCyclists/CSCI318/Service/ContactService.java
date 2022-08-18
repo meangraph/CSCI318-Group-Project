@@ -25,9 +25,7 @@ public class ContactService {
 
     public Optional<Contact> getContactById(long id){return contactDao.getContactById(id);}
 
-    public int deleteContactById(long id){
-        return contactDao.deleteContactById(id);
-    }
+    public int deleteContactById(long id){return contactDao.deleteContactById(id);}
 
     public int updateContactById(long id, Contact newContact){
         return contactDao.updateContactById(id,newContact);

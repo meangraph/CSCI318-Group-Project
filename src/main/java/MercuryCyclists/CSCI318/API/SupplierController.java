@@ -1,6 +1,5 @@
 package MercuryCyclists.CSCI318.API;
 
-import MercuryCyclists.CSCI318.Model.Contact;
 import MercuryCyclists.CSCI318.Model.Supplier;
 import MercuryCyclists.CSCI318.Service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +43,13 @@ public class SupplierController {
     public void updateSupplierById(@PathVariable ("ID") long id, @Valid @NonNull @RequestBody Supplier supplier) {
         supplierService.updateSupplierById(id, supplier);}
 
+    @PutMapping(path = "{supplierID}/{contactID}")//Update Requests
+    public void addContactToSupplier(@PathVariable ("supplierID") long supplierID, @PathVariable ("contactID") long contactID){
+        supplierService.addContactToSupplier(supplierID, contactID);
+    }
+
+    @DeleteMapping(path = "{supplierID}/{contactID}")
+    public void removeContactFromSupplier(@PathVariable ("supplierID") long supplierID, @PathVariable ("contactID") long contactID){
+        supplierService.removeContactFromSupplier(supplierID, contactID);
+    }
 }

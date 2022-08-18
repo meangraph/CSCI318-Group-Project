@@ -1,5 +1,7 @@
 package MercuryCyclists.CSCI318.DataAccessObject;
 
+
+import MercuryCyclists.CSCI318.Model.Contact;
 import MercuryCyclists.CSCI318.Model.Supplier;
 import org.springframework.stereotype.Repository;
 
@@ -7,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository("fakeDao")
-public class SupplierDataAccessService implements SupplierDao {
+public class SupplierDataAccessService extends ContactDataAccessService implements SupplierDao  {
 
     private static final List<Supplier> DB = new ArrayList<>();
-
 
     @Override
     public int createSupplier(Supplier supplier) {
@@ -56,4 +56,25 @@ public class SupplierDataAccessService implements SupplierDao {
                 .orElse(0);
     }
 
+    @Override
+    public int addContactToSupplier(long supplierID, long contactID) {
+
+        Optional<Contact> contact = getContactById(contactID);
+        Optional<Supplier> supplier = getSupplierById(supplierID);
+
+        supplier.get().addContact(contact);
+        Supplier supplier2 = supplier.get();
+        contact.get().setSupplier(supplier2);
+        return 1;
+    }
+
+    @Override
+    public int removeContactFromSupplier(long supplierID, long contactID) {
+        Optional<Contact> contact = getContactById(contactID);
+        Optional<Supplier> supplier = getSupplierById(supplierID);
+        supplier.get().removeContact(contact);
+        return 1;
+    }
+
 }
+

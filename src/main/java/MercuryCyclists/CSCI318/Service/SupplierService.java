@@ -17,7 +17,7 @@ public class SupplierService {
     private final ContactDao contactDao;
 
     @Autowired
-    public SupplierService(@Qualifier("fakeDao") SupplierDao supplierDao, ContactDao contactDao) {
+    public SupplierService(@Qualifier("fakeDao") SupplierDao supplierDao, @Qualifier("fakeDao1") ContactDao contactDao) {
         this.supplierDao = supplierDao;
         this.contactDao = contactDao;
     }
@@ -35,4 +35,8 @@ public class SupplierService {
     public int updateSupplierById(long id, Supplier newSupplier) { return supplierDao.updateSupplierById(id, newSupplier); }
 
     public int deleteSupplierById(long id) { return supplierDao.deleteSupplierById(id); }
+
+    public int addContactToSupplier(long supplierID, long contactID){ return supplierDao.addContactToSupplier(supplierID, contactID);}
+
+    public int removeContactFromSupplier(long supplierID, long contactID){ return supplierDao.removeContactFromSupplier(supplierID, contactID);}
 }

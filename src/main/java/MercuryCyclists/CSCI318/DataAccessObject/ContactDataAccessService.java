@@ -1,6 +1,7 @@
 package MercuryCyclists.CSCI318.DataAccessObject;
 
 import MercuryCyclists.CSCI318.Model.Contact;
+import MercuryCyclists.CSCI318.Model.Supplier;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("fakeDao1")
-public class ContactDataAccessService implements ContactDao{
+public class ContactDataAccessService implements ContactDao {
 
     private static final List<Contact> DB = new ArrayList<>();
     @Override
@@ -45,8 +46,10 @@ public class ContactDataAccessService implements ContactDao{
         return getContactById(id)
                 .map(contact -> {
                     int contactIndex = DB.indexOf(contact);
+                    Supplier supplier = contact.getSupplier();
                     if (contactIndex >= 0) {
                         DB.set(contactIndex, new Contact(id, update.getName(), update.getEmail(), update.getPhone(), update.getPosition()));
+                        supplier.addContact(getContactById(id));
                         return 1;
                     }
                     return 0;

@@ -2,23 +2,29 @@ package MercuryCyclists.CSCI318.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@Entity
 public class Supplier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ID;
     @NotBlank
-    private final String companyName;
+    private String companyName;
     @NotBlank
-    private final String base;
-    private final List<Contact> contacts;
+    private String base;
+
+    @Transient
+    private List<Optional<Contact>> contacts;
+
+    @OneToMany(mappedBy = "supplier",
+               cascade = CascadeType.ALL)
+    private List<Contact> contactList;
 
     public Supplier(@JsonProperty("id") long ID,
                     @JsonProperty("companyName") String companyName,
@@ -27,7 +33,10 @@ public class Supplier {
         this.companyName = companyName;
         this.base = base;
         this.contacts = new ArrayList<>();
+        this.contactList = new ArrayList<>();
     }
+
+    public Supplier() {}
 
     public long getID() {return ID;}
 
@@ -39,5 +48,21 @@ public class Supplier {
         return base;
     }
 
-    public List<Contact> getContacts() { return contacts; }
+    public List<Optional<Contact>> getContacts() { return contacts; }
+
+    public void addContact(Optional<Contact> contact) {
+        if (contacts.stream().anyMatch(c -> c.get().getID() == contact.get().getID())) {
+            System.out.println("Found!");
+            removeContact(contact);
+        }
+        contacts.add(contact);
+        contactList.add(contact.get());
+    }
+
+    public void removeContact(Optional<Contact> contact) {
+        contacts.remove(contact);
+        contactList.remove(contact);
+
+    }
+
 }

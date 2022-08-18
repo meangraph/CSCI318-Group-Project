@@ -1,11 +1,12 @@
 package MercuryCyclists.CSCI318.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Optional;
+
 /** This is the class responsible for creating objects of type Contact. Contact objects are employees that are a part of Supplier objects*/
 
 @Entity(name = "Contact")
@@ -24,6 +25,19 @@ public class Contact {
     private String email;
 
     private String position;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    @JsonIgnore
+    private Supplier supplier;
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 
     public Contact() {
 

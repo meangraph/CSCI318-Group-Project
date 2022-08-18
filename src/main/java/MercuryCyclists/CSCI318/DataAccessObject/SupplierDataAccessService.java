@@ -58,9 +58,13 @@ public class SupplierDataAccessService extends ContactDataAccessService implemen
 
     @Override
     public int addContactToSupplier(long supplierID, long contactID) {
+
         Optional<Contact> contact = getContactById(contactID);
         Optional<Supplier> supplier = getSupplierById(supplierID);
+
         supplier.get().addContact(contact);
+        Supplier supplier2 = supplier.get();
+        contact.get().setSupplier(supplier2);
         return 1;
     }
 

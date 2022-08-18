@@ -1,5 +1,6 @@
 package MercuryCyclists.CSCI318.DataAccessObject;
 
+import MercuryCyclists.CSCI318.Model.Contact;
 import MercuryCyclists.CSCI318.Model.Supplier;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface SupplierDao {
     int addContactToSupplier(long supplierID, long contactID);
 
     int removeContactFromSupplier(long supplierID, long contactID);
+
 }

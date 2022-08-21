@@ -39,10 +39,6 @@ public class Contact {
         this.supplier = supplier;
     }
 
-    public Contact() {
-
-    }
-
     public Contact(@JsonProperty("id") long id,
                    @JsonProperty("name") String name,
                    @JsonProperty("phone") String phone,
@@ -54,6 +50,8 @@ public class Contact {
         this.email = email;
         this.position = position;
     }
+
+    public Contact(){}
 
     public long getID() {
         return ID;

@@ -2,25 +2,36 @@ package MercuryCyclists.CSCI318.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import MercuryCyclists.CSCI318.Model.Address;
 
+@Entity(name = "Store")
 public class Store {
 
     //Not sure what to put in as a manager object, so i just put in a numbered ID.
     @NotBlank
     private int managerID;
     @NotBlank
-    private Address address;
+    @Id
+    private String address;
 
+    @OneToMany(mappedBy = "store",
+            cascade = CascadeType.ALL)
     List<Sale> sales;
 
-    public Store(@JsonProperty int managerID, Address address){
+    public Store(@JsonProperty int managerID, String address){
         this.managerID = managerID;
         this.address = address;
     }
 
-    public Address getAddress(){
+    public Store(){}
+
+    public String getAddress(){
         return address;
     }
 

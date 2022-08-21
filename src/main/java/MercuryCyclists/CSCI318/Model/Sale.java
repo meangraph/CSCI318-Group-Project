@@ -1,11 +1,17 @@
 package MercuryCyclists.CSCI318.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 
 //Might need to redo this one. To make it easier, i put a bool flag called "online" to denote weather it's online or offline.
+@Entity(name = "Sale")
 public class Sale {
 
     @NotBlank
@@ -15,15 +21,21 @@ public class Sale {
     @NotBlank
     boolean online;
 
+    @NotBlank
+    @Id
+    long reciptNumber;
     //instore vars
-    int reciptNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    @JsonIgnore
     Store store;
 
     //online vars
     String customerName;
 
     //In person constructor
-    public Sale(@JsonProperty String productName, @JsonProperty int quantity, @JsonProperty int reciptNumber, Store store){
+    public Sale(@JsonProperty String productName, @JsonProperty int quantity, @JsonProperty long reciptNumber, Store store){
         this.productName = productName;
         this.quantity = quantity;
         this.reciptNumber = reciptNumber;
@@ -31,11 +43,14 @@ public class Sale {
         online = false;
     }
 
+    public Sale(){}
+
     //Online constructor
-    public Sale(@JsonProperty String productName, @JsonProperty int quantity, @JsonProperty String customerName){
+    public Sale(@JsonProperty String productName, @JsonProperty int quantity, @JsonProperty String customerName, @JsonProperty long reciptNumber){
         this.productName = productName;
         this.quantity = quantity;
         this.customerName = customerName;
+        this.reciptNumber = reciptNumber;
         online = true;
     }
 
@@ -47,7 +62,7 @@ public class Sale {
         return online;
     }
 
-    public int getReciptNumber() {
+    public long getReciptNumber() {
         return reciptNumber;
     }
 

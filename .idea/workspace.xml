@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CSCI318:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="77f81f1a-5cf4-4085-ace2-e4082865f9b4" name="Changes" comment="Changed the classes to allow the Onetomany and Manytoone annotations. It's done in a bit of a hacky way, so I will rewrite it later. Has a bug where contacts are displayed twice in the suppliers list of contacts, both the pre-edit and post-edit.">
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Model/OrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Model/Part.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Model/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Model/Sale.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Model/Supplier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/ProcurementMicroserviceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Repository/ContactRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Repository/SupplierRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Service/ContactService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Service/SupplierService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/API/ContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/API/ContactController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/API/SupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/API/SupplierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/ContactDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/ContactDataAccessService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/PartDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/PartDataAccessService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/ProductDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/ProductDataAccessService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/SaleDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/SaleDataAccessService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/SupplierDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/DataAccessObject/SupplierDataAccessService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/MercuryCyclistsApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/main/java/com/example/ProcurementMicroservice/Model/Contact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Part.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Sale.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Store.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Model/Supplier.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Service/ContactService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MercuryCyclists/CSCI318/Service/SupplierService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MercuryCyclists/CSCI318/MercuryCyclistsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProcurementMicroservice/src/test/java/com/example/ProcurementMicroservice/ProcurementMicroserviceApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2D2xnGdfrYkZYxdGVKOqDWI7qE5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "15",
+    "last_opened_file_path": "C:/Users/B/Desktop/CSCI318 Group Project",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "spring.configuration.checksum": "3d3a4aef32bd81f3036c664ac87d7c2b"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\B\Desktop\CSCI318 Group Project\CSCI318" />
+      <recent name="C:\Users\B\Desktop\CSCI318 Group Project\CSCI318\InventoryMicroservice\.mvn" />
+      <recent name="C:\Users\B\Desktop\CSCI318 Group Project\CSCI318\src\main\java\MercuryCyclists\CSCI318\InventoryMS\Repository" />
+      <recent name="C:\Users\B\Desktop\CSCI318 Group Project\CSCI318\src\main\java\MercuryCyclists\CSCI318\InventoryMS\API" />
+      <recent name="C:\Users\B\Desktop\CSCI318 Group Project\CSCI318\src\main\java\MercuryCyclists\CSCI318\InventoryMS\Service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="MercuryCyclists.CSCI318.InventoryMS.Service" />
+      <recent name="MercuryCyclists.CSCI318.InventoryMS.Model" />
+      <recent name="MercuryCyclists.CSCI318.SalesMS.Model" />
+      <recent name="MercuryCyclists.CSCI318.InventoryMS.Repository" />
+      <recent name="MercuryCyclists.CSCI318.InventoryMS.API" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ProcurementMSApplication">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="CSCI318" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="CSCI318" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InventoryMSApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="CSCI318" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="MercuryCyclists.CSCI318.InventoryMS.InventoryMSApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MercuryCyclists.CSCI318.InventoryMS.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MercuryCyclistsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="CSCI318" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="MercuryCyclists.CSCI318.MercuryCyclistsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProcurementMSApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ALTERNATIVE_JRE_PATH" value="C:\Program Files\Java\jdk1.8.0_111\jre" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="CSCI318" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="CSCI318.ProcurementMicroservice.ProcurementMSApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MercuryCyclists.CSCI318.ProcurementMS.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.MercuryCyclistsApplication" />
+      <item itemvalue="Spring Boot.InventoryMSApplication" />
+      <item itemvalue="Spring Boot.ProcurementMSApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ProcurementMSApplication" />
+        <item itemvalue="Spring Boot.InventoryMSApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\B\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77f81f1a-5cf4-4085-ace2-e4082865f9b4" name="Changes" comment="" />
+      <created>1659911147452</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659911147452</updated>
+      <workItem from="1659911148770" duration="208000" />
+      <workItem from="1659911372146" duration="25060000" />
+      <workItem from="1660018875865" duration="9832000" />
+      <workItem from="1660103810486" duration="1645000" />
+      <workItem from="1660288091760" duration="602000" />
+      <workItem from="1660517077107" duration="24951000" />
+      <workItem from="1660692289737" duration="3088000" />
+      <workItem from="1660696471531" duration="1062000" />
+      <workItem from="1660697847819" duration="215000" />
+      <workItem from="1660702066017" duration="2213000" />
+      <workItem from="1660776908749" duration="26381000" />
+      <workItem from="1660816519157" duration="2320000" />
+      <workItem from="1660857957018" duration="3095000" />
+      <workItem from="1660953265320" duration="34000" />
+      <workItem from="1662348225323" duration="1499000" />
+      <workItem from="1662350861060" duration="2147000" />
+      <workItem from="1662353056310" duration="835000" />
+      <workItem from="1662950232293" duration="70000" />
+      <workItem from="1663628344292" duration="7050000" />
+      <workItem from="1663635456046" duration="36000" />
+      <workItem from="1663636108263" duration="750000" />
+      <workItem from="1663636887577" duration="39000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit.&#10;&#10;Basic implementation of the group assignment project. Currently, supports creating, updating, retrieval and deletion of Supplier and Contact objects.">
+      <created>1660029358861</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1660029358861</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Testing to see if discord webhook is working correctly.">
+      <created>1660523891611</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1660523891611</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed ID type of contact from string to long, functions also changed from string to long.&#10;&#10;Added long id to supplier.&#10;Added ability to delete and update a supplier.">
+      <created>1660528599607</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660528599607</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added functionality of adding a contact to a supplier. This is achieved by sending a put request on the URI api/v1/supplier/{supplierID}/{controllerID}">
+      <created>1660536323730</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1660536323730</updated>
+    </task>
+    <task id="LOCAL-00005" summary="I suppose if we have a way to add contacts to suppliers we should also implement a way to remove contact from suppliers. Added this functionality. Delete requests operate on the same URL as put requests. api/v1/suppler/{supplierID}/{contactID}">
+      <created>1660536984291</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660536984291</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Changed the classes to allow the Onetomany and Manytoone annotations. It's done in a bit of a hacky way, so I will rewrite it later. Has a bug where contacts are displayed twice in the suppliers list of contacts, both the pre-edit and post-edit.">
+      <created>1660795426985</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660795426985</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate:hibernate-core" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit.&#10;&#10;Basic implementation of the group assignment project. Currently, supports creating, updating, retrieval and deletion of Supplier and Contact objects." />
+    <MESSAGE value="Testing to see if discord webhook is working correctly." />
+    <MESSAGE value="Changed ID type of contact from string to long, functions also changed from string to long.&#10;&#10;Added long id to supplier.&#10;Added ability to delete and update a supplier." />
+    <MESSAGE value="Added functionality of adding a contact to a supplier. This is achieved by sending a put request on the URI api/v1/supplier/{supplierID}/{controllerID}" />
+    <MESSAGE value="I suppose if we have a way to add contacts to suppliers we should also implement a way to remove contact from suppliers. Added this functionality. Delete requests operate on the same URL as put requests. api/v1/suppler/{supplierID}/{contactID}" />
+    <MESSAGE value="Changed the classes to allow the Onetomany and Manytoone annotations. It's done in a bit of a hacky way, so I will rewrite it later. Has a bug where contacts are displayed twice in the suppliers list of contacts, both the pre-edit and post-edit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed the classes to allow the Onetomany and Manytoone annotations. It's done in a bit of a hacky way, so I will rewrite it later. Has a bug where contacts are displayed twice in the suppliers list of contacts, both the pre-edit and post-edit." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.springframework.beans.factory.UnsatisfiedDependencyException" package="org.springframework.beans.factory" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

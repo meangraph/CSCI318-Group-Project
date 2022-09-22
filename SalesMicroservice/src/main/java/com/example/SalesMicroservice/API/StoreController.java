@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("api/v1/store")//localhost:8080/api/v1/store
+@RequestMapping("api/v1/store")//localhost:8082/api/v1/store
 @RestController
 public class StoreController {
 

@@ -1,6 +1,7 @@
 
 package com.example.InventoryMicroservice.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -8,20 +9,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import javax.persistence.*;
 
 @Entity(name = "Part")
+@SequenceGenerator(name="seq", initialValue=100, allocationSize=1000)
 @JsonPropertyOrder({"id"})
 public class Part {
 
     private String name;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private Long partID;
     private String description;
     @ManyToOne
     @JsonIgnore
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "supplier_id")
+    @JsonBackReference
     private Supplier supplier;
 
     private int stock;
@@ -69,6 +73,7 @@ public class Part {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+        //supplier.addPart(this);
     }
 
     public int getStock() {

@@ -2,8 +2,10 @@ package com.example.SalesMicroservice.Service;
 
 import com.example.SalesMicroservice.Model.*;
 import com.example.SalesMicroservice.Repository.SalesRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,18 +18,23 @@ public class SaleService {
     private final SalesRepo inStoreRepo;
     private final SalesRepo onLineRepo;
     private final StoreService storeService;
-    private final ProductService productService;
+    private final RestTemplate restTemplate;
 
-    public SaleService(@Qualifier("inStoreSaleRepo") SalesRepo inStoreRepo, @Qualifier("onlineSaleRepo") SalesRepo onLineRepo, StoreService storeService, ProductService productService) {
+    @Autowired
+    public SaleService(@Qualifier("inStoreSaleRepo") SalesRepo inStoreRepo, @Qualifier("onlineSaleRepo") SalesRepo onLineRepo, StoreService storeService, RestTemplate restTemplate) {
         this.inStoreRepo = inStoreRepo;
         this.onLineRepo = onLineRepo;
         this.storeService = storeService;
-        this.productService = productService;
+        this.restTemplate = restTemplate;
     }
 
 
-    public void createSale(Long productId,OnlineSale sale){
-        Product product = productService.getProductById(productId);
+    public KafkaEvent createSale(Long productId,OnlineSale sale){
+
+        RestTemplate restTemplate = new RestTemplate();
+        Product product = restTemplate.getForObject("http://localhost8080/api/v1/products/" + productId, Product.class);
+        KafkaEvent event = new KafkaEvent();
+
 
         if(product.getStock() == 0){
             System.out.println(product.getName() + " has no stock, checking to see if the parts are available");
@@ -42,6 +49,9 @@ public class SaleService {
                     if (response.equalsIgnoreCase("Yes")){
                         System.out.println("Your product has been successfully placed on back order");
                         sale.setStatus(OrderStatus.BACKORDER);
+                        event.setSale(sale);
+                        event.setProduct(product);
+                        event.setComment("Sale sent to procurement");
                     }
                     else{
                         sale.setStatus(OrderStatus.CANCELED);
@@ -56,12 +66,14 @@ public class SaleService {
 
         sale.setProduct(product);
         onLineRepo.save(sale);
+        return null;
     }
 
     @Transactional
-    public void createSale(Long productId,Long storeId,InStoreSale sale){
+    public KafkaEvent createSale(Long productId,Long storeId,InStoreSale sale){
         Store store = storeService.getStoreById(storeId);
-        Product product = productService.getProductById(productId);
+        Product product = restTemplate.getForObject("http://localhost8080/api/v1/products/" + productId, Product.class);
+        KafkaEvent event = new KafkaEvent();
 
         if(product.getStock() == 0){
             System.out.println(product.getName() + " has no stock, checking to see if the parts are available");
@@ -79,6 +91,9 @@ public class SaleService {
                     }
                     else{
                         sale.setStatus(OrderStatus.CANCELED);
+                        event.setSale(sale);
+                        event.setProduct(product);
+                        event.setComment("Sale sent to procurement");
                     }
 
                 }
@@ -92,6 +107,7 @@ public class SaleService {
         sale.setProduct(product);
         store.addSales(sale);
         inStoreRepo.save(sale);
+        return null;
     }
 
     public List<Sale> getAllSales() {return inStoreRepo.findAll();}

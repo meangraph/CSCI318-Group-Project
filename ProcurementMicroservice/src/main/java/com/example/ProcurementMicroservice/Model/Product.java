@@ -22,13 +22,9 @@ public class Product {
     private int stock;
 
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private List<Part> partsList = new ArrayList<>();
-
-    @OneToMany
-    @JsonIgnore
-    private List<Sale> salesList = new ArrayList<>();
 
 
 
@@ -51,13 +47,6 @@ public class Product {
         this.partsList = partsList;
     }
 
-    public List<Sale> getSalesList() {
-        return salesList;
-    }
-
-    public void setSalesList(List<Sale> salesList) {
-        this.salesList = salesList;
-    }
 
     public Product() {
     }
@@ -89,14 +78,6 @@ public class Product {
 
     public void removePart(Part part) { partsList.remove(part);}
 
-
-    public void addSales(Sale sale) {
-       salesList.add(sale);
-    }
-
-    public void removeSale(Sale sale) {
-        salesList.remove(sale);
-    }
 
     public void setName(String name) {
         this.name = name;

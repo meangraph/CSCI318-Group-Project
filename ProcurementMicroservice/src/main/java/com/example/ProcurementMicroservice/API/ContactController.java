@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("api/v1/contact")//localhost:8080/api/v1/contact
+@RequestMapping("api/v1/contact")//localhost:8081/api/v1/contact
 @RestController
 public class ContactController {
 

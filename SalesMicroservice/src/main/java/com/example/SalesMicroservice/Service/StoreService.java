@@ -4,6 +4,7 @@ import com.example.SalesMicroservice.Model.InStoreSale;
 import com.example.SalesMicroservice.Model.Store;
 import com.example.SalesMicroservice.Repository.StoreRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -11,11 +12,10 @@ import java.util.List;
 public class StoreService {
 
     private final StoreRepo storeRepo;
-    private final ProductService productService;
 
-    public StoreService(StoreRepo storeRepo, ProductService productService) {
+
+    public StoreService(StoreRepo storeRepo) {
         this.storeRepo = storeRepo;
-        this.productService = productService;
     }
 
     public void addStore(Store store) { storeRepo.save(store); }

@@ -1,6 +1,7 @@
 package com.example.ProcurementMicroservice.Service;
 
 import com.example.ProcurementMicroservice.Model.Contact;
+import com.example.ProcurementMicroservice.Model.Part;
 import com.example.ProcurementMicroservice.Model.Supplier;
 import com.example.ProcurementMicroservice.Repository.SupplierRepo;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ public class SupplierService {
             supplier.setBase(newSupplier.getBase());
             supplier.setCompanyName(newSupplier.getCompanyName());
             supplier.setContactList(newSupplier.getContactList());
+            supplier.setPartList(newSupplier.getPartList());
             return supplierRepo.save(supplier);
         }).orElseGet(() -> {
             newSupplier.setID(id);
@@ -63,4 +65,5 @@ public class SupplierService {
 
         supplier.removeContact(contact);
     }
+
 }

@@ -1,6 +1,7 @@
 package com.example.ProcurementMicroservice.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -20,12 +21,12 @@ public class Supplier {
     private String base;
 
     @OneToMany(mappedBy = "supplier",
-               cascade = CascadeType.ALL)
+               cascade = CascadeType.PERSIST)
     private List<Contact> contactList = new ArrayList<Contact>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "supplier",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private List<Part> partList = new ArrayList<>();
 
 
@@ -88,7 +89,6 @@ public class Supplier {
     }
 
     public void addPart(Part part){
-        part.setSupplier(this);
         partList.add(part);
     }
 

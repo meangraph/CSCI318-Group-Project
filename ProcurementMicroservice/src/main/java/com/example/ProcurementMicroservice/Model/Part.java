@@ -1,6 +1,7 @@
 
 package com.example.ProcurementMicroservice.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity(name = "Part")
 @JsonPropertyOrder({"id"})
-public class Part {
+public class Part  {
 
     private String name;
     @Id
@@ -21,7 +22,7 @@ public class Part {
     private Product product;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonBackReference
     private Supplier supplier;
 
     private int stock;

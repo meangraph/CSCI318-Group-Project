@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/v1/sale")//localhost:8080/api/v1/sale
+@RequestMapping("api/v1/sale")//localhost:8082/api/v1/sale
 @RestController
 public class SaleController {
 

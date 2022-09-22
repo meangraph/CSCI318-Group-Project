@@ -1,8 +1,6 @@
 package com.example.InventoryMicroservice.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,12 +18,12 @@ public class Supplier {
     private String base;
 
     @OneToMany(mappedBy = "supplier",
-               cascade = CascadeType.ALL)
+               cascade = CascadeType.PERSIST)
     private List<Contact> contactList = new ArrayList<Contact>();
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "supplier",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.PERSIST)
     private List<Part> partList = new ArrayList<>();
 
 
@@ -88,7 +86,6 @@ public class Supplier {
     }
 
     public void addPart(Part part){
-        part.setSupplier(this);
         partList.add(part);
     }
 

@@ -5,21 +5,21 @@ import com.example.InventoryMicroservice.Model.Supplier;
 import com.example.InventoryMicroservice.Repository.PartRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class PartService {
 
     private final PartRepo partRepo;
-    private final SupplierService supplierService;
+    private final RestTemplate restTemplate;
+
 
     @Autowired
-    public PartService(PartRepo partRepo,  SupplierService supplierService) {
+    public PartService(PartRepo partRepo, RestTemplate restTemplate) {
         this.partRepo = partRepo;
-        this.supplierService = supplierService;
-
+        this.restTemplate = restTemplate;
     }
 
     public void addPart(Part part) { partRepo.save(part); }
@@ -37,7 +37,6 @@ public class PartService {
             part.setStock(newPart.getStock());
             return partRepo.save(part);
         }).orElseGet(() -> {
-            newPart.setPartID(id);
             return partRepo.save(newPart);
         });
     }
@@ -47,17 +46,24 @@ public class PartService {
         partRepo.delete(part);
     }
 
-    @Transactional
     public void addPartToSupplier(Long partID,Long supplierID ) {
-        Supplier supplier = supplierService.getSupplierById(supplierID);
         Part part = getPartById(partID);
-
+        Supplier supplier = restTemplate.getForObject("http://localhost:8081/api/v1/supplier/" + supplierID, Supplier.class);
         supplier.addPart(part);
+        part.setSupplier(supplier);
+
+        restTemplate.put("http://localhost:8081/api/v1/supplier/" + supplierID,supplier, Supplier.class);
+
+
+
+        System.out.println(supplier.getBase() + " " + supplier.getCompanyName() + " " + supplier.getID());
+
+
 
     }
 
     public void removePartFromSupplier(Long partID, Long supplierID) {
-        Supplier supplier = supplierService.getSupplierById(supplierID);
+        Supplier supplier = restTemplate.getForObject("http://localhost:8081/api/v1/supplier/" + supplierID, Supplier.class);
         Part part = getPartById(partID);
 
         part.setSupplier(null);

@@ -22,7 +22,7 @@ public class Product {
     private int stock;
 
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private List<Part> partsList = new ArrayList<>();
 

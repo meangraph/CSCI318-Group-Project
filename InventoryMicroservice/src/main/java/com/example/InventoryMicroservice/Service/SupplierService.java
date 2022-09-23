@@ -1,9 +1,8 @@
-package com.example.ProcurementMicroservice.Service;
+package com.example.InventoryMicroservice.Service;
 
-import com.example.ProcurementMicroservice.Model.Contact;
-import com.example.ProcurementMicroservice.Model.Part;
-import com.example.ProcurementMicroservice.Model.Supplier;
-import com.example.ProcurementMicroservice.Repository.SupplierRepo;
+import com.example.InventoryMicroservice.Model.Contact;
+import com.example.InventoryMicroservice.Model.Supplier;
+import com.example.InventoryMicroservice.Repository.SupplierRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,13 +13,11 @@ import java.util.List;
 public class SupplierService {
 
     private final SupplierRepo supplierRepo;
-    private final ContactService contactService;
 
     private final RestTemplate restTemplate;
 
-    public SupplierService(SupplierRepo supplierRepo, ContactService contactService, RestTemplate restTemplate) {
+    public SupplierService(SupplierRepo supplierRepo, RestTemplate restTemplate) {
         this.supplierRepo = supplierRepo;
-        this.contactService = contactService;
         this.restTemplate = restTemplate;
     }
 
@@ -39,7 +36,6 @@ public class SupplierService {
         return supplierRepo.findById(id).map(supplier -> {
             supplier.setBase(newSupplier.getBase());
             supplier.setCompanyName(newSupplier.getCompanyName());
-            supplier.setContactList(newSupplier.getContactList());
             supplier.setPartList(newSupplier.getPartList());
             return supplierRepo.save(supplier);
         }).orElseGet(() -> {
@@ -52,21 +48,6 @@ public class SupplierService {
         Supplier supplier = getSupplierById(id);
         supplierRepo.delete(supplier);
 
-    }
-    @Transactional
-    public void addContactToSupplier(Long supplierID, Long contactID){
-        Supplier supplier = getSupplierById(supplierID);
-        Contact contact = contactService.getContactById(contactID);
-        supplier.addContact(contact);
-
-
-    }
-    @Transactional
-    public void removeContactFromSupplier(Long supplierID, Long contactID){
-        Supplier supplier = getSupplierById(supplierID);
-        Contact contact = contactService.getContactById(contactID);
-
-        supplier.removeContact(contact);
     }
 
 

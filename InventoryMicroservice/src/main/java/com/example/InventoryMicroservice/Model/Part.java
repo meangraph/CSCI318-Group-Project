@@ -24,7 +24,6 @@ public class Part {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "supplier_id")
     @JsonBackReference
     private Supplier supplier;
 

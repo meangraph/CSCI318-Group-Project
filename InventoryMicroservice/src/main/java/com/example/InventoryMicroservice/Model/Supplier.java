@@ -19,6 +19,7 @@ public class Supplier {
 
     @OneToMany(mappedBy = "supplier",
                cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Contact> contactList = new ArrayList<Contact>();
 
     @JsonManagedReference

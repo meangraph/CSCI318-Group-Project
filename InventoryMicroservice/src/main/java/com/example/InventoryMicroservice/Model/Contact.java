@@ -15,7 +15,6 @@ import javax.persistence.*;
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
 
     private String name;
@@ -35,6 +34,17 @@ public class Contact {
                    @JsonProperty("phone") String phone,
                    @JsonProperty("email") String email,
                    @JsonProperty("position") String position) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.position = position;
+    }
+    public Contact(Long id,
+                   String name,
+                   String phone,
+                   String email,
+                   String position) {
+        this.ID = id;
         this.name = name;
         this.phone = phone;
         this.email = email;

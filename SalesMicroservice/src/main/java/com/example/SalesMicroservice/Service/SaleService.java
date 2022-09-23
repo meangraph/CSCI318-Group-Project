@@ -1,6 +1,7 @@
 package com.example.SalesMicroservice.Service;
 
 import com.example.SalesMicroservice.Model.*;
+import com.example.SalesMicroservice.Repository.ProductRepo;
 import com.example.SalesMicroservice.Repository.SalesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,13 +19,15 @@ public class SaleService {
     private final SalesRepo inStoreRepo;
     private final SalesRepo onLineRepo;
     private final StoreService storeService;
+    private final ProductRepo productRepo;
     private final RestTemplate restTemplate;
 
     @Autowired
-    public SaleService(@Qualifier("inStoreSaleRepo") SalesRepo inStoreRepo, @Qualifier("onlineSaleRepo") SalesRepo onLineRepo, StoreService storeService, RestTemplate restTemplate) {
+    public SaleService(@Qualifier("inStoreSaleRepo") SalesRepo inStoreRepo, @Qualifier("onlineSaleRepo") SalesRepo onLineRepo, StoreService storeService, ProductRepo productRepo, RestTemplate restTemplate) {
         this.inStoreRepo = inStoreRepo;
         this.onLineRepo = onLineRepo;
         this.storeService = storeService;
+        this.productRepo = productRepo;
         this.restTemplate = restTemplate;
     }
 
@@ -32,14 +35,25 @@ public class SaleService {
     public KafkaEvent createSale(Long productId,OnlineSale sale){
 
         RestTemplate restTemplate = new RestTemplate();
-        Product product = restTemplate.getForObject("http://localhost8080/api/v1/products/" + productId, Product.class);
+        Product product = restTemplate.getForObject("http://localhost:8080/api/v1/product/" + productId, Product.class);
+        Product newProduct = new Product();
+
+        newProduct.setName(product.getName());
+        newProduct.setComment(product.getComment());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setStock(product.getStock());
+        newProduct.setPartsList(product.getPartsList());
+        newProduct.setProductID(product.getProductID());
+
+        productRepo.save(newProduct);
+
         KafkaEvent event = new KafkaEvent();
 
 
-        if(product.getStock() == 0){
+        if(newProduct.getStock() == 0){
             System.out.println(product.getName() + " has no stock, checking to see if the parts are available");
-            for (int i = 0; i < product.getParts().size(); i++) {
-                int stockCheck = product.getParts().get(i).getStock();
+            for (int i = 0; i < newProduct.getParts().size(); i++) {
+                int stockCheck = newProduct.getParts().get(i).getStock();
                 if (stockCheck == 0){
                     System.out.println(product.getName() + " parts has no stock. We can put this item on back order to get the parts from out suppliers. Would you like to" +
                             " do this? Yes/No");
@@ -65,6 +79,7 @@ public class SaleService {
         }
 
         sale.setProduct(product);
+        sale.setStatus(OrderStatus.PROCESSING);
         onLineRepo.save(sale);
         return null;
     }
@@ -72,13 +87,25 @@ public class SaleService {
     @Transactional
     public KafkaEvent createSale(Long productId,Long storeId,InStoreSale sale){
         Store store = storeService.getStoreById(storeId);
-        Product product = restTemplate.getForObject("http://localhost8080/api/v1/products/" + productId, Product.class);
+        Product product = restTemplate.getForObject("http://localhost:8080/api/v1/product/" + productId, Product.class);
+        Product newProduct = new Product();
+
+        newProduct.setName(product.getName());
+        newProduct.setComment(product.getComment());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setStock(product.getStock());
+        newProduct.setPartsList(product.getPartsList());
+        newProduct.setProductID(product.getProductID());
+
+        productRepo.save(newProduct);
         KafkaEvent event = new KafkaEvent();
 
-        if(product.getStock() == 0){
+
+
+        if(newProduct.getStock() == 0){
             System.out.println(product.getName() + " has no stock, checking to see if the parts are available");
-            for (int i = 0; i < product.getParts().size(); i++) {
-                int stockCheck = product.getParts().get(i).getStock();
+            for (int i = 0; i < newProduct.getParts().size(); i++) {
+                int stockCheck = newProduct.getParts().get(i).getStock();
                 if (stockCheck == 0){
                     System.out.println(product.getName() + " parts has no stock. We can put this item on back order to get the parts from out suppliers. Would you like to" +
                             " do this? Yes/No");
@@ -106,6 +133,7 @@ public class SaleService {
         sale.setStore(store);
         sale.setProduct(product);
         store.addSales(sale);
+        sale.setStatus(OrderStatus.COMPLETED);
         inStoreRepo.save(sale);
         return null;
     }

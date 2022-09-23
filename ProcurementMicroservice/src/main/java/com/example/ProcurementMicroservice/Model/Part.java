@@ -14,7 +14,6 @@ public class Part  {
 
     private String name;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long partID;
     private String description;
     @ManyToOne
@@ -27,11 +26,11 @@ public class Part  {
 
     private int stock;
 
-    public Part(@JsonProperty String name,
-                @JsonProperty Long partID,
-                @JsonProperty String description,
-                @JsonProperty Supplier supplier,
-                @JsonProperty int stock){
+    public Part(String name,
+                Long partID,
+                String description,
+                Supplier supplier,
+                int stock){
         this.name = name;
         this.partID = partID;
         this.description = description;

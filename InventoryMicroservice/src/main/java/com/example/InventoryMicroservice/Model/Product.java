@@ -15,7 +15,6 @@ public class Product {
     private String name;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productID;
     private double price;
     String comment;
@@ -32,10 +31,12 @@ public class Product {
 
 
 
-    public Product(@JsonProperty String name,
-                   @JsonProperty double price,
-                   @JsonProperty String comment,
-                   @JsonProperty int stock) {
+    public Product(Long id,
+                   String name,
+                   double price,
+                   String comment,
+                   int stock) {
+        this.productID = id;
         this.name = name;
         this.price = price;
         this.comment = comment;

@@ -1,8 +1,11 @@
 package com.example.InventoryMicroservice.Service;
 
+import com.example.InventoryMicroservice.Model.Contact;
 import com.example.InventoryMicroservice.Model.Part;
 import com.example.InventoryMicroservice.Model.Supplier;
+import com.example.InventoryMicroservice.Repository.ContactRepo;
 import com.example.InventoryMicroservice.Repository.PartRepo;
+import com.example.InventoryMicroservice.Repository.SupplierRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,12 +17,20 @@ public class PartService {
 
     private final PartRepo partRepo;
     private final RestTemplate restTemplate;
+    private final SupplierRepo supplierRepo;
+    private final ContactService contactService;
+    private final SupplierService supplierService;
+    private final ContactRepo contactRepo;
 
 
     @Autowired
-    public PartService(PartRepo partRepo, RestTemplate restTemplate) {
+    public PartService(PartRepo partRepo, RestTemplate restTemplate, SupplierRepo supplierRepo, ContactService contactService, SupplierService supplierService, ContactRepo contactRepo) {
         this.partRepo = partRepo;
         this.restTemplate = restTemplate;
+        this.supplierRepo = supplierRepo;
+        this.contactService = contactService;
+        this.supplierService = supplierService;
+        this.contactRepo = contactRepo;
     }
 
     public void addPart(Part part) { partRepo.save(part); }
@@ -49,16 +60,24 @@ public class PartService {
     public void addPartToSupplier(Long partID,Long supplierID ) {
         Part part = getPartById(partID);
         Supplier supplier = restTemplate.getForObject("http://localhost:8081/api/v1/supplier/" + supplierID, Supplier.class);
+        Contact contact = restTemplate.getForObject("http://localhost:8081/api/v1/contact/" + "2", Contact.class);
+
+        Contact newContact = new Contact(contact.getID(), contact.getName(), contact.getPhone(), contact.getEmail(), contact.getPosition());
+        contactRepo.save(newContact);
         supplier.addPart(part);
-        part.setSupplier(supplier);
 
         restTemplate.put("http://localhost:8081/api/v1/supplier/" + supplierID,supplier, Supplier.class);
 
 
-
-        System.out.println(supplier.getBase() + " " + supplier.getCompanyName() + " " + supplier.getID());
-
-
+            Supplier newSupplier = new Supplier();
+            newSupplier.setBase(supplier.getBase());
+            newSupplier.setCompanyName(supplier.getCompanyName());
+            newSupplier.setContactList(supplier.getContactList());
+            newSupplier.setPartList(supplier.getPartList());
+            newSupplier.setID(supplierID);
+            supplierRepo.save(newSupplier);
+            part.setSupplier(newSupplier);
+            updatePartById(partID, part);
 
     }
 

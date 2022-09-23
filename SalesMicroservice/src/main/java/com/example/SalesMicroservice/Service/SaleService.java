@@ -93,7 +93,7 @@ public class SaleService {
         newProduct.setName(product.getName());
         newProduct.setComment(product.getComment());
         newProduct.setPrice(product.getPrice());
-        newProduct.setStock(product.getStock());
+        newProduct.setStock(0);
         newProduct.setPartsList(product.getPartsList());
         newProduct.setProductID(product.getProductID());
 
@@ -104,38 +104,38 @@ public class SaleService {
 
         if(newProduct.getStock() == 0){
             System.out.println(product.getName() + " has no stock, checking to see if the parts are available");
-            for (int i = 0; i < newProduct.getParts().size(); i++) {
-                int stockCheck = newProduct.getParts().get(i).getStock();
-                if (stockCheck == 0){
-                    System.out.println(product.getName() + " parts has no stock. We can put this item on back order to get the parts from out suppliers. Would you like to" +
-                            " do this? Yes/No");
-                    Scanner scanner = new Scanner(System.in);
-                    String response = scanner.nextLine();
+                System.out.println(product.getName() + " parts has no stock. We can put this item on back order to get the parts from out suppliers. Would you like to" +
+                        " do this? Yes/No");
+                Scanner scanner = new Scanner(System.in);
+                String response = scanner.nextLine();
 
-                    if (response.equalsIgnoreCase("Yes")){
-                        System.out.println("Your product has been successfully placed on back order");
-                        sale.setStatus(OrderStatus.BACKORDER);
-                    }
-                    else{
-                        sale.setStatus(OrderStatus.CANCELED);
-                        event.setSale(sale);
-                        event.setProduct(product);
-                        event.setComment("Sale sent to procurement");
-                    }
+                if (response.equalsIgnoreCase("Yes")){
+                    System.out.println("Your product has been successfully placed on back order");
+                    sale.setStatus(OrderStatus.BACKORDER);
+                    sale.setProduct(product);
+                    sale.setStore(store);
+                    store.addSales(sale);
+                    event.setSale(sale);
+                    event.setProduct(product);
+                    event.setComment("Sale sent to procurement");
+                    inStoreRepo.save(sale);
 
                 }
-                else {
-                    sale.setStatus(OrderStatus.CONFIRMED);
-                }
-            }
+                else{
+                    sale.setStatus(OrderStatus.CANCELED);
 
-        }
-        sale.setStore(store);
-        sale.setProduct(product);
-        store.addSales(sale);
-        sale.setStatus(OrderStatus.COMPLETED);
-        inStoreRepo.save(sale);
-        return null;
+                }
+
+
+
+        }else {
+            sale.setStore(store);
+            sale.setProduct(product);
+            store.addSales(sale);
+            sale.setStatus(OrderStatus.COMPLETED);
+            inStoreRepo.save(sale);
+            return null;
+        }return null;
     }
 
     public List<Sale> getAllSales() {return inStoreRepo.findAll();}

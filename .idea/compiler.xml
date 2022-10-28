@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ProcurementMicroservice" />
+        <module name="InventoryMicroservice" />
+        <module name="SalesMicroservice" />
+        <module name="BusinessIntelligenceMicroservice" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BusinessIntelligenceMicroservice" target="1.8" />
+      <module name="InventoryMicroservice" target="1.8" />
+      <module name="ProcurementMicroservice" target="1.8" />
+      <module name="SalesMicroservice" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BusinessIntelligenceMicroservice" options="-parameters" />
+      <module name="InventoryMicroservice" options="-parameters" />
+      <module name="ProcurementMicroservice" options="-parameters" />
+      <module name="SalesMicroservice" options="-parameters" />
+    </option>
+  </component>
+</project>

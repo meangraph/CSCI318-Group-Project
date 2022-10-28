@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BusinessIntelligenceMicroservice/BusinessIntelligenceMicroservice.iml" filepath="$PROJECT_DIR$/BusinessIntelligenceMicroservice/BusinessIntelligenceMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CSCI318-Group-Project.iml" filepath="$PROJECT_DIR$/.idea/CSCI318-Group-Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InventoryMicroservice/InventoryMicroservice.iml" filepath="$PROJECT_DIR$/InventoryMicroservice/InventoryMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProcurementMicroservice/ProcurementMicroservice.iml" filepath="$PROJECT_DIR$/ProcurementMicroservice/ProcurementMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SalesMicroservice/SalesMicroservice.iml" filepath="$PROJECT_DIR$/SalesMicroservice/SalesMicroservice.iml" />
+    </modules>
+  </component>
+</project>

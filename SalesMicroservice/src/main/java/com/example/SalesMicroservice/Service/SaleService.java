@@ -3,8 +3,10 @@ package com.example.SalesMicroservice.Service;
 import com.example.SalesMicroservice.Model.*;
 import com.example.SalesMicroservice.Repository.ProductRepo;
 import com.example.SalesMicroservice.Repository.SalesRepo;
+import org.apache.kafka.streams.StreamsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,13 +16,18 @@ import java.util.Scanner;
 
 
 @Service
+
 public class SaleService {
+
 
     private final SalesRepo inStoreRepo;
     private final SalesRepo onLineRepo;
     private final StoreService storeService;
     private final ProductRepo productRepo;
     private final RestTemplate restTemplate;
+
+    @Autowired
+    private StreamBridge streamBridge;
 
     @Autowired
     public SaleService(@Qualifier("inStoreSaleRepo") SalesRepo inStoreRepo, @Qualifier("onlineSaleRepo") SalesRepo onLineRepo, StoreService storeService, ProductRepo productRepo, RestTemplate restTemplate) {
@@ -134,7 +141,9 @@ public class SaleService {
             store.addSales(sale);
             sale.setStatus(OrderStatus.COMPLETED);
             inStoreRepo.save(sale);
-            return null;
+
+            streamBridge.send("sales-outbound", sale);
+
         }return null;
     }
 

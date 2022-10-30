@@ -47,7 +47,7 @@ public class Sale {
     }
 
 
-    public LocalDateTime `getDataTime() {
+    public LocalDateTime getDataTime() {
         return dataTime;
     }
 
